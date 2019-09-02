@@ -2,7 +2,7 @@
 
 # Beschreibung RPI Installation 
 
-1. Start mit Clean Image von Raspberry (Stretch Lite)
+1. Start mit Clean Image von Raspberry (Raspbian Buster Lite - Minimal image based on Debian Buster)
 
 1.1 Infos
 
@@ -10,23 +10,19 @@
 diskutil list
 diskutil unmountDisk /dev/disk2
 sudo dd bs=1m if=path_of_your_image.img of=/dev/disk2 conv=sync
-sudo dd bs=1m if=/Users/tluscre1/Documents/Studium.Local/PREN_STAGING/molly/2019-04-08-raspbian-stretch-lite.img of=/dev/disk2 conv=sync
+sudo dd bs=1m if=/Users/tluscre1/Documents/Studium.Local/PREN_STAGING/2019-07-10-raspbian-buster-lite.img  of=/dev/disk2 conv=sync
 Progress = press Ctrl+T
 ```
 
 activate ssh
 ```
 touch /Volumes/boot/ssh
-cp ~/Documents/Studium.Local/PREN/hslu_digit-detection/rpi_install/remo/molly_wpa_supplicant.conf /Volumes/boot/wpa_supplicant.conf
+cp ~/Documents/Studium.Local/PREN/hslu-pren-raspi-install/config/molly_wpa_supplicant.conf /Volumes/boot/wpa_supplicant.conf
 ```
 
 disk eject 
 ```
 diskutil eject /dev/disk2
-```
-
-```
-
 ```
 
 username and password

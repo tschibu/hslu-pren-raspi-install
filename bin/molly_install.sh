@@ -15,7 +15,7 @@ reset=`tput sgr0`
 #echo "${red}red text ${green}green text${reset}"
 
 # Global config
-export OPENCV_VERSION=4.1.0
+export OPENCV_VERSION=4.1.1
 export PYTHON_VERSION=3.6.8
 
 # Expand FS
@@ -115,7 +115,7 @@ rm Python-${PYTHON_VERSION}.tar.xz
 
 echo "[INFO] [2] : python installed completed"
 
-PACKAGES="cmake curl e2fslibs build-essential cifs-utils g++ gcc gcc-4.6-base gcc-4.7-base gcc-4.8-base gcc-4.9-base gcc-5-base gcc-6-base git htop initramfs-tools kmod libapt-inst2.0 libapt-pkg5.0 libc-bin libc6 libdbus-1-3 libgnutls30 python3-pip python3-rpi.gpio python3-smbus wiringpi python3-picamera python-pip espeak python3-scipy python3-h5py libhdf5-serial-dev hdf5-tools libblas-dev liblapack-dev picamera"
+PACKAGES="cmake curl e2fslibs build-essential cifs-utils g++ gcc gcc-4.9-base gcc-5-base gcc-6-base git htop initramfs-tools kmod libapt-inst2.0 libapt-pkg5.0 libc-bin libc6 libdbus-1-3 libgnutls30 python3-pip python3-rpi.gpio python3-smbus wiringpi python3-picamera python-pip espeak python3-scipy python3-h5py libhdf5-dev hdf5-tools libblas-dev liblapack-dev"
 
 echo "[INFO] [2] : Installing Linux Packages"
 echo "[INFO] [2] : Package List: "
