@@ -76,10 +76,10 @@ sudo apt-get update && sudo apt-get upgrade -y
 
 echo "[INFO] [1.2] : Remove unnessecary stuff"
 # Remove unnessecary stuff
+sudo apt-get autoremove -y
 sudo apt-get purge -y wolfram-engine
 sudo apt-get purge -y libreoffice*
 sudo apt-get clean
-sudo apt-get autoremove -y
 
 echo "[INFO] [1] : Completed"
 echo "[INFO] ${yellow}========================================================${reset}"

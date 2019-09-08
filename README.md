@@ -25,13 +25,31 @@ disk eject
 diskutil eject /dev/disk2
 ```
 
+connect to pi
+```
+ssh pi@192.168.1.xx
+```
+
 username and password
 ```
 user = pi
 pass = raspberrypi
 ```
 
+*Deploy bin script*
 ```
+
+```
+sftp pi@192.168.1.129 <<END
+mkdir install
+cd install
+lcd /Users/tluscre1/Documents/Studium.Local/PREN/hslu-pren-raspi-install/bin
+lpwd
+put *
+END
+
+```
+cd $HOME/install
 ./molly_install.sh > molly_install.log
 tail -f molly_install.log
 ```
