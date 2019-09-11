@@ -164,6 +164,11 @@ echo 'source "$HOME/virtualenvs/molly/bin/activate"' >> ~/.profile
 echo "[INFO] [3.1.4] : activate virtualenv for molly"
 source "$HOME/virtualenvs/molly/bin/activate"
 
+# check if virtualenv is set
+if [ ! ${VIRTUAL_ENV} ] ; then
+    echo "${red}[ERROR] virtualenv is not set correctly!"
+fi
+
 PIPPACKAGES="board rpi-ws281x RPi.GPIO smbus2 configparser urllib3 Werkzeug pyserial numpy termcolor h5py transitions mock" #no picam and no pillow (v6 broken)
 
 echo "[INFO] [3.2] : Installing Python Packs over (pip)"
@@ -184,12 +189,17 @@ sudo /etc/init.d/dphys-swapfile start
 
 echo "${yellow}========================================================${reset}"
 
+echo "[INFO] [3.4.1] : Installing prerequisites for all the AI Tools"
 
-echo "[INFO] [3.4] : Installing Tensorflow (~20min)"
+AI_PACKAGES="python-numpy python-scipy libzmq-dev libblas-dev liblapack-dev gfortran"
+
+sudo apt-get install ${AI_PACKAGES} -y
+
+echo "[INFO] [3.4.2] : Installing Tensorflow (pi3 = ~20min / pi3 = ~5min /)"
 
 pip install --upgrade tensorflow
 
-echo "[INFO] [3.5] : Installing KERAS (~90min)"
+echo "[INFO] [3.4.3] : Installing KERAS (pi3 = ~90min / pi4 = ~)"
 
 pip install keras
 
@@ -273,7 +283,6 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 
 
 echo "${yellow}==========================Start CV Compilation==============================${reset}"
-# TODO
 make -j4
 echo "${yellow}==========================Completed CV Compilation==============================${reset}"
 
