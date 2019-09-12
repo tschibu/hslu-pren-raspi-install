@@ -38,8 +38,6 @@ pass = raspberrypi
 
 *Deploy bin script*
 ```
-
-```
 sftp pi@192.168.1.129 <<END
 mkdir install
 cd install
@@ -47,6 +45,8 @@ lcd /Users/tluscre1/Documents/Studium.Local/PREN/hslu-pren-raspi-install/bin
 lpwd
 put *
 END
+```
+
 
 ```
 cd $HOME/install
