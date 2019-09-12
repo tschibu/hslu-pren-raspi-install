@@ -18,53 +18,6 @@ reset=`tput sgr0`
 export OPENCV_VERSION=4.1.1
 export PYTHON_VERSION=3.6.8
 
-# Expand FS
-# sudo raspi-config --expand-rootfs
-
-# Pi name
-# -> do it manually
-# echo "[INFO] Give this computer a name.."
-# PI_HOSTNAME="molly"
-# export PI_HOSTNAME="mollyplusplus" # only [a-z] and [0-9]
-# echo "[INFO] Your Raspberry Pi will rename to ${PI_HOSTNAME}"
-# sudo sed -i "s/raspberrypi/$PI_HOSTNAME/g" /etc/hosts
-# sudo sed -i "s/raspberrypi/$PI_HOSTNAME/g" /etc/hostname
-
-# mit GUI
-# sudo apt-get install xrdp
-
-# Check if sudo is used
-# why u need this?
-#if [ "$(id -u)" != 0 ]; then
-#  echo "${red}[ERROR] Sorry, you need to run this script with sudo${red}"
-#  echo "${red}[ERROR[ use type >>sudo !!<<"
-#  exit 1
-#fi
-
-
-# motd
-sudo cp -f molly_dynmotd.sh /usr/local/bin/dynmotd
-sudo chmod +x /usr/local/bin/dynmotd
-echo "[INFO] [0] : add motd"
-echo "" >> ~/.profile
-echo 'dynmotd' >> ~/.profile
-dynmotd
-sudo bash -c 'echo "" > /etc/motd'
-
-# locale
-sudo sed -i 's/en_GB.UTF-8 UTF-8/# en_GB.UTF-8 UTF-8/g' /etc/locale.gen
-sudo sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
-sudo bash -c 'echo -e "LANG=en_US.UTF-8" > /etc/default/locale'
-sudo bash -c 'echo -e "LC_ALL=en_US.UTF-8" >> /etc/default/locale'
-sudo bash -c 'echo -e "LANGUAGE=en_US.UTF-8" >> /etc/default/locale'
-
-sudo locale-gen en_US.UTF-8
-sudo update-locale en_US.UTF-8
-
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
-
 ##
 # Base OS Update
 ##
@@ -409,29 +362,6 @@ sudo sed -i 's/console=serial0,115200//g' /boot/cmdline.txt
 
 
 echo "[INFO] [5] : Completed"
-
-echo "[INFO] [6] : add ssh-key to connect password-less"
-mkdir -p $HOME/.ssh
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDEyBmR9nxhTC3cCyTJsa4JfwtJkaZeIAhhTZCDRhLo1V2WwctJN5MITkq9x9jfjEVzjJMe5xo8xIc1JFdq7JRa3CtviazkQSUkReOhB5Wlq8eKkP832pyo45lh+PT7NhtZsL/DU1/j1tPQPmtB62hexh24FySsxILEsh2oOmbSkwsK01Af4nvJy2zYerr4oB6miQiSFa/kXkfbuXQzXtNX2dAk/BVSpFSiUMwwyxQiPAAGdn7SSC4S13Y0RluUY+jPytX+Pl6/uiBKNQ7PJcvhQTSOHhdN/zoghbDl0VTQPvajgIOdrdESX0jhkc6IHSro6gFwA19aI5LoRnDMa/jZ tschibu" > $HOME/.ssh/authorized_keys
-
-echo "[INFO] [7] : change pass for user pi"
-
-# TODO
-# NEW_PASS=`echo "molly" | md5sum | awk '{ print $1 }'`
-# sudo bash -c 'echo pi:${NEW_PASS} | chpasswd'
-# unset ${NEW_PASS}
-
-echo "[INFO] [7] : pass changed"
-
-echo "[INFO] [7] : add ssid-network"
-
-sudo cp -f molly_wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf
-
-echo "[INFO] [7] : ssid added."
-
-echo "${yellow}========================================================${reset}"
-
-echo "[INFO] [6] : Cleanup Installations"
 
 #cleanup python stuff
 #apt-get --purge remove build-essential tk-dev libncurses5-dev libncursesw5-dev libreadline6-dev libdb5.3-dev libgdbm-dev libsqlite3-dev libssl-dev libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev libffi-dev -y

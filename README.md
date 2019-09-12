@@ -50,7 +50,10 @@ END
 
 ```
 cd $HOME/install
-./molly_install.sh > molly_install.log
+touch molly_install.log
+./01_molly_install.sh > molly_install.log
+cd $HOME/install
+./02_molly_install.sh > molly_install.log
 tail -f molly_install.log
 ```
 
