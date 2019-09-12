@@ -167,6 +167,7 @@ source "$HOME/virtualenvs/molly/bin/activate"
 # check if virtualenv is set
 if [ ! ${VIRTUAL_ENV} ] ; then
     echo "${red}[ERROR] virtualenv is not set correctly!"
+    exit 1
 fi
 
 PIPPACKAGES="board rpi-ws281x RPi.GPIO smbus2 configparser urllib3 Werkzeug pyserial numpy termcolor h5py transitions mock" #no picam and no pillow (v6 broken)
@@ -199,7 +200,7 @@ echo "[INFO] [3.4.2] : Installing Tensorflow (pi3 = ~20min / pi3 = ~5min /)"
 
 pip install --upgrade tensorflow
 
-echo "[INFO] [3.4.3] : Installing KERAS (pi3 = ~90min / pi4 = ~)"
+echo "[INFO] [3.4.3] : Installing KERAS (pi3 = ~90min / pi4 = ~60min)"
 
 pip install keras
 
@@ -238,15 +239,26 @@ echo "[INFO] [4.1.1] : Install Opencv ${OPENCV_VERSION} from Git"
 #pip3 install opencv-contrib-python
 
 # CV4: Build Tools
-sudo apt-get install build-essential cmake unzip pkg-config -y
+sudo apt-get install build-essential cmake git unzip pkg-config -y
 
 # Libraries Image and Video
 sudo apt-get install libjpeg-dev libpng-dev libtiff-dev -y
-sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev -y
-sudo apt-get install libxvidcore-dev libx264-dev -y
+sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev v4l-utils -y
+sudo apt-get install libgtk2.0-dev libcanberra-gtk* -y
+sudo apt-get install libxvidcore-dev libx264-dev libgtk-3-dev -y
 
 # numerical optimization packages
-sudo apt-get install libatlas-base-dev gfortran python3-dev python2.7-dev -y
+sudo apt-get install libjasper-dev libopenblas-dev libatlas-base-dev libblas-dev python2.7-dev -y
+sudo apt-get install liblapack-dev gfortran -y
+sudo apt-get install gcc-arm* -y
+
+# python packages
+sudo apt-get install python3-dev python3-numpy -y
+sudo apt-get install python-dev python3-pip python-numpy -y
+
+# addon
+sudo apt-get install libtbb2 libtbb-dev libdc1394-22-dev -y
+sudo apt-get install protobuf-compiler -y
 
 # Download and Install OpenCV
 
@@ -283,7 +295,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 
 
 echo "${yellow}==========================Start CV Compilation==============================${reset}"
-make -j4
+make -j1
 echo "${yellow}==========================Completed CV Compilation==============================${reset}"
 
 sudo make install
